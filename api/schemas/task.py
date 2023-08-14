@@ -2,10 +2,17 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-class TaskCreate(BaseModel):
-    title: Optional[str] = Field(None, example="クリーニングを取りに行く")
+class TaskCreate(TaskBase):
+    pass
 
-class Task(BaseModel): # BaseModel はFastAPIのスキーマモデルであることを表すので、このクラスを継承して Task クラスを作成しています。
+class TaskCreateResponse(TaskCreate):
     id: int
-    title: Optional[str] = Field(None, example="クリーニングを取りに行く")
+
+    class Config:
+        orm_mode = True
+class Task(TaskBase):
+    id: int
     done: bool = Field(False, description="完了フラグ")
+  # DB接続の際に使用する
+    class Config:
+      orm_mode = True
