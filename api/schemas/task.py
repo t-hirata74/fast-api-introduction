@@ -10,9 +10,10 @@ class TaskCreateResponse(TaskCreate):
 
     class Config:
         orm_mode = True
+
 class Task(TaskBase):
     id: int
     done: bool = Field(False, description="完了フラグ")
-  # DB接続の際に使用する
-    class Config:
+    
+    class Config: # DB接続の際に使用する
       orm_mode = True
