@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 import starlette.status
 import pytest_asyncio
+
 from api.db import get_db, Base
 from api.main import app
 
@@ -11,7 +12,7 @@ from api.main import app
 ASYNC_DB_URL = "sqlite+aiosqlite:///:memory:"
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def async_client() -> AsyncClient:
     # Async用のengineとsessionを作成
     async_engine = create_async_engine(ASYNC_DB_URL, echo=True)
