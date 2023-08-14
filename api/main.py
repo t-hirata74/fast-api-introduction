@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from api.routers import task, done
 
-# @ で始まるこの部分を、Pythonでは デコレータ と呼びます。
-# Javaのアノテーションと似た形式ですが、Pythonのデコレータは、関数を修飾し、関数に新たな機能を追加します。
-@app.get("/hello")
-async def hello():
-    return {"message": "hello world!"}
+app = FastAPI()
+# apiをインクルードし、エンドポイントを追加する
+app.include_router(task.router)
+app.include_router(done.router)
